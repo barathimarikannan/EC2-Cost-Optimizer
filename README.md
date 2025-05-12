@@ -27,6 +27,7 @@ This project automates cost optimization for EC2 instances by automatically star
 │   │   └── provider.tf
 
 ```
+[EC2-cost-optimizer.drawio.pdf](https://github.com/user-attachments/files/20153846/EC2-cost-optimizer.drawio.pdf)
 
 ⚙️ **Prerequisites**
 
@@ -36,4 +37,76 @@ This project automates cost optimization for EC2 instances by automatically star
    - Git plugin
    - Terraform plugin
    - Pipeline plugin
-- jq for local JSON parsing (optional)
+  
+
+🔐 AWS Setup
+1. Configure AWS Credentials
+Before using Terraform, ensure AWS credentials are configured locally:
+
+```
+aws configure
+```
+- Enter your:
+- Access Key ID
+- Secret Access Key
+- Default region (e.g., us-east-1)
+- Output format (e.g., json)
+
+🧱 Terraform Setup (Dev Environment)
+2. Navigate to the Development Environment
+```
+cd environments/dev
+```
+3. Initialize Terraform
+```
+terraform init
+```
+4. Review the Execution Plan
+```
+terraform plan -var-file="terraform.tfvars"
+```
+5. Apply the Configuration
+```
+terraform apply -var-file="terraform.tfvars"
+```
+This will:
+
+ - Create VPC, Subnets, Security Group
+ - Launch EC2 instance with NGINX preinstalled
+ - Create IAM roles and policies
+ - Deploy Lambda functions (initial empty placeholders unless zipped)
+ - Configure EventBridge schedules
+
+🧩 Lambda Function Setup
+6. Zip Lambda Code
+From the lambda/ directory:
+```
+zip start_ec2.zip start_ec2.py
+zip stop_ec2.zip stop_ec2.py
+```
+
+🔁 Jenkins CI/CD Integration
+7. Jenkins Setup
+   - Install Jenkins locally (via Docker or native)
+
+Ensure the following plugins are installed:
+    -Git Plugin
+    -Pipeline Plugin
+    -Terraform Plugin
+
+8. Configure Pipeline
+  -Create a new pipeline job in Jenkins
+  -Link it to your GitHub repo
+  -Jenkinsfile (in repo root) defines steps:
+  -Terraform init → plan → apply
+
+Optional: zip & upload Lambda code
+
+🧹 Teardown (Clean-Up Resources)
+From the same environment directory:
+```
+terraform destroy -var-file="terraform.tfvars"
+```
+This will remove all infrastructure provisioned by Terraform.
+
+

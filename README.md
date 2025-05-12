@@ -27,7 +27,7 @@ This project automates cost optimization for EC2 instances by automatically star
 │   │   └── provider.tf
 
 ```
-[EC2-cost-optimizer.drawio.pdf](https://github.com/user-attachments/files/20153846/EC2-cost-optimizer.drawio.pdf)
+![EC2-cost-optimizer drawio](https://github.com/user-attachments/assets/5ef5a695-51c2-4e6e-82ee-4530e131f04e)
 
 ⚙️ **Prerequisites**
 

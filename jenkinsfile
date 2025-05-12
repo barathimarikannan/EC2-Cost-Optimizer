@@ -1,27 +1,41 @@
 pipeline {
-    agent any
+  agent any
 
-    stages {
-        stage('Init') {
-            steps {
-                sh 'terraform init'
-            }
-        }
-        stage('Validate') {
-            steps {
-                sh 'terraform validate'
-            }
-        }
-        stage('Plan') {
-            steps {
-                sh 'terraform plan -var-file="terraform.tfvars"'
-            }
-        }
-        stage('Apply') {
-            steps {
-                input 'Approve apply?'
-                sh 'terraform apply -auto-approve -var-file="terraform.tfvars"'
-            }
-        }
+  environment {
+    AWS_ACCESS_KEY_ID = credentials('aws-access-key-id')
+    AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
+    AWS_DEFAULT_REGION = 'us-east-1'
+  }
+
+  stages {
+    stage('Checkout') {
+      steps {
+        git 'https://your-repo-url'
+      }
     }
+
+    stage('Terraform Init') {
+      steps {
+        dir('env/dev') {
+          sh 'terraform init'
+        }
+      }
+    }
+
+    stage('Terraform Plan') {
+      steps {
+        dir('env/dev') {
+          sh 'terraform plan -var-file="terraform.tfvars"'
+        }
+      }
+    }
+
+    stage('Terraform Apply') {
+      steps {
+        dir('env/dev') {
+          sh 'terraform apply -auto-approve -var-file="terraform.tfvars"'
+        }
+      }
+    }
+  }
 }

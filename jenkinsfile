@@ -10,7 +10,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git 'https://your-repo-url'
+        git 'https://github.com/barathimarikannan/EC2-Cost-Optimizer.git'
       }
     }
 

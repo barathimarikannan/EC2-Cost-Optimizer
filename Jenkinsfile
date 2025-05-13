@@ -7,10 +7,11 @@ pipeline {
 
   stages {
     stage('Checkout') {
-      steps {
-        git 'https://github.com/barathimarikannan/EC2-Cost-Optimizer.git'
-      }
+       steps {
+          git branch: 'main', url: 'https://github.com/barathimarikannan/EC2-Cost-Optimizer.git'
+        }
     }
+
 
     stage('Terraform Init') {
       steps {

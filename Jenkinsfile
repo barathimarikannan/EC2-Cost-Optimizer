@@ -16,7 +16,7 @@ pipeline {
       steps {
         withCredentials([
           [$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials'],
-          sshUserPrivateKey(credentialsId: 'my__ssh__key', keyFileVariable: 'SSH_KEY')
+          sshUserPrivateKey(credentialsId: 'my_ssh_key', keyFileVariable: 'SSH_KEY')
         ]) {
           dir('env/dev') {
             sh '''
@@ -37,7 +37,7 @@ pipeline {
       steps {
         withCredentials([
           [$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials'],
-          sshUserPrivateKey(credentialsId: 'my__ssh__key', keyFileVariable: 'SSH_KEY')
+          sshUserPrivateKey(credentialsId: 'my_ssh_key', keyFileVariable: 'SSH_KEY')
         ]) {
           dir('env/dev') {
             sh '''
@@ -58,7 +58,7 @@ pipeline {
       steps {
         withCredentials([
           [$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials'],
-          sshUserPrivateKey(credentialsId: 'my__ssh__key', keyFileVariable: 'SSH_KEY')
+          sshUserPrivateKey(credentialsId: 'my_ssh_key', keyFileVariable: 'SSH_KEY')
         ]) {
           dir('env/dev') {
             sh '''
